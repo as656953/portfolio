@@ -12,6 +12,15 @@
   </head>
   <body>
     <section id="home" class="home">
+      <header>
+        <a href="index.html" class="logo">Aditya's Portfolio</a>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
       <div class="home-content">
         <div class="home-img">
           <img
@@ -33,10 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="daynight">
-        <ion-icon name="sunny-outline" style="display: none"></ion-icon>
-        <ion-icon name="moon-outline" style="display: block"></ion-icon>
-      </div>
+      
     </section>
     <script
       type="module"
@@ -48,19 +54,6 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <script>
-      // Initialize dark mode functionality
-      const dayNightToggle = document.querySelector(".daynight");
-      const sunIcon = dayNightToggle.querySelector('[name="sunny-outline"]');
-      const moonIcon = dayNightToggle.querySelector('[name="moon-outline"]');
-
-      dayNightToggle.addEventListener("click", function () {
-        document.querySelector(".home").classList.toggle("night");
-        sunIcon.style.display =
-          sunIcon.style.display === "none" ? "block" : "none";
-        moonIcon.style.display =
-          moonIcon.style.display === "none" ? "block" : "none";
-      });
-
       // Initialize Typed.js
       let typed = new Typed(".text", {
         strings: ["Frontend Developer", "UI/UX Designer", "Problem Solver"],

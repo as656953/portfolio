@@ -2,11 +2,43 @@ let daynight = document.querySelector(".daynight");
 let banner = document.querySelector(".banner");
 let home = document.querySelector(".home");
 let about = document.querySelector(".about");
+let projects = document.querySelector(".projects");
 
-daynight.addEventListener("click", () => {
-  banner.classList.toggle("night");
-  home.classList.toggle("night");
-  about.classList.toggle("night");
+// Only add event listener if daynight button exists (index.html)
+const daynightButton = document.querySelector('.daynight');
+if (daynightButton) {
+    daynightButton.addEventListener('click', () => {
+        // Find the closest section parent
+        const section = daynightButton.closest('section');
+        if (section) {
+            section.classList.toggle('night');
+            
+            // Store the night mode state
+            const isNight = section.classList.contains('night');
+            localStorage.setItem('nightMode', isNight);
+            
+            // Apply the same night mode state to all sections
+            document.querySelectorAll('section').forEach(otherSection => {
+                if (isNight) {
+                    otherSection.classList.add('night');
+                } else {
+                    otherSection.classList.remove('night');
+                }
+            });
+        }
+    });
+}
+
+// Apply saved night mode state on page load (works on all pages)
+window.addEventListener('load', () => {
+    const isNight = localStorage.getItem('nightMode') === 'true';
+    document.querySelectorAll('section').forEach(section => {
+        if (isNight) {
+            section.classList.add('night');
+        } else {
+            section.classList.remove('night');
+        }
+    });
 });
 
 document.querySelector(".download-btn").addEventListener("click", () => {
@@ -95,3 +127,5 @@ document.querySelectorAll("header ul li a").forEach((link) => {
     loadContent(page);
   });
 });
+
+
