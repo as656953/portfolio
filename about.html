@@ -63,18 +63,5 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <script src="script.js"></script>
-    <script>
-      const dayNightToggle = document.querySelector(".daynight");
-      const sunIcon = dayNightToggle.querySelector('[name="sunny-outline"]');
-      const moonIcon = dayNightToggle.querySelector('[name="moon-outline"]');
-
-      dayNightToggle.addEventListener("click", function () {
-        document.querySelector(".about").classList.toggle("night");
-        sunIcon.style.display =
-          sunIcon.style.display === "none" ? "block" : "none";
-        moonIcon.style.display =
-          moonIcon.style.display === "none" ? "block" : "none";
-      });
-    </script>
   </body>
 </html>
