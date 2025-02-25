@@ -1,0 +1,722 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 100px;
+  background-color: #fff;
+  transition: 0.5s;
+}
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo {
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: 800;
+  color: #333;
+  user-select: none;
+  transition: 0.5s;
+}
+header ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+header ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 6px 15px;
+  transition: 0.5s;
+}
+header ul li a:hover {
+  background-color: #1b322f;
+  color: #fff;
+}
+.content {
+  position: relative;
+  max-width: 700;
+}
+.content h2 {
+  color: #333;
+  font-size: 4em;
+  font-weight: 900;
+  line-height: 1.3em;
+  transition: 0.5s;
+}
+.content p {
+  font-size: 1.2em;
+  color: #666;
+  margin: 10px 0;
+  font-weight: 500;
+  transition: 0.5s;
+}
+.content button {
+  position: relative;
+  color: #fff;
+  border: none;
+  outline: none;
+  background-color: #1b322f;
+  padding: 10px 25px;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  font-size: 1.25em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.content button:hover {
+  background-color: #00dfc4;
+  color: #333;
+}
+.daynight {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 2em;
+}
+.daynight ion-icon:nth-child(2),
+.banner.night .daynight ion-icon:nth-child(1) {
+  display: none;
+}
+
+.banner.night .daynight ion-icon:nth-child(2) {
+  display: block;
+}
+.banner.night {
+  background: #333;
+}
+.banner.night .daynight {
+  color: #fff;
+  background-color: #444;
+}
+.banner.night header .logo,
+.banner.night .content h2,
+.banner.night .content p,
+.banner.night .content button,
+.banner.night header ul li a {
+  color: #fff;
+}
+.banner.night header ul li a:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.social-links {
+  margin: 20px 0;
+}
+
+.social-links a {
+  color: #333;
+  font-size: 1.5em;
+  margin-right: 20px;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #00dfc4;
+}
+
+.stats {
+  display: flex;
+  gap: 40px;
+  margin: 30px 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 2em;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Add these to your existing night mode styles */
+.banner.night .social-links a {
+  color: #fff;
+}
+
+.banner.night .social-links a:hover {
+  color: #00dfc4;
+}
+
+.banner.night .stat-number {
+  color: #fff;
+}
+
+.banner.night .stat-label {
+  color: #ccc;
+}
+
+/* Home Section Styling */
+.home {
+  min-height: 100vh;
+  padding: 100px;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.home-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  max-width: 1200px;
+}
+
+.home-img {
+  flex: 1;
+  position: relative;
+}
+
+.home-img::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* border: 3px solid #1b322f; */
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.home-img:hover::after {
+  top: 10px;
+  left: 10px;
+}
+
+.home-img img {
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  filter: grayscale(20%);
+  transition: 0.5s;
+}
+
+.home-img img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.home-text {
+  flex: 1;
+}
+
+.home-text h3 {
+  font-size: 1.5em;
+  color: #666;
+  font-weight: 500;
+}
+
+.home-text h1 {
+  font-size: 3.5em;
+  font-weight: 900;
+  color: #1b322f;
+  line-height: 1.2;
+  margin: 15px 0;
+}
+
+.home-text span {
+  color: #00dfc4;
+}
+
+.home-text p {
+  font-size: 1.1em;
+  margin: 20px 0 30px;
+  color: #666;
+  line-height: 1.7;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #1b322f;
+  color: #fff;
+  font-size: 1em;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #00dfc4;
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btn:hover {
+  color: #333;
+}
+
+/* Update dark mode styles for home section */
+.home.night {
+  background: #333;
+}
+
+.home.night .home-text h3,
+.home.night .home-text p {
+  color: #fff;
+}
+
+.home.night .home-text h1 {
+  color: #fff;
+}
+
+.home.night .daynight {
+  color: #fff;
+  background-color: #444;
+}
+
+.home.night .btn {
+  background: #444;
+}
+
+.home.night .btn:hover {
+  color: #333;
+}
+
+.home.night .home-img::after {
+  border-color: #00dfc4;
+}
+
+/* Add some animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.home-img {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-text {
+  animation: slideIn 1s ease-out;
+}
+
+/* About Section Styling */
+.about {
+  min-height: 100vh;
+  padding: 100px;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  position: relative; /* Added for daynight button positioning */
+}
+
+/* Night mode styles for about section */
+.about.night {
+  background: #333;
+}
+
+.about.night .about-text .heading {
+  color: #fff;
+}
+
+.about.night .about-text h3,
+.about.night .about-text p {
+  color: #fff;
+}
+
+.about.night .info-box {
+  background: #444;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about.night .info-box h5 {
+  color: #fff;
+}
+
+.about.night .info-box p {
+  color: #ccc;
+}
+
+.about.night .info-box i {
+  color: #00dfc4;
+}
+
+/* Ensure daynight button styling is consistent across sections */
+.home .daynight,
+.about .daynight {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 2em;
+}
+
+.home .daynight ion-icon:nth-child(2),
+.about .daynight ion-icon:nth-child(2),
+.home.night .daynight ion-icon:nth-child(1),
+.about.night .daynight ion-icon:nth-child(1) {
+  display: none;
+}
+
+.home.night .daynight ion-icon:nth-child(2),
+.about.night .daynight ion-icon:nth-child(2) {
+  display: block;
+}
+
+/* About Content Styling */
+.about-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text .heading {
+  font-size: 3.5em;
+  font-weight: 900;
+  color: #1b322f;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.about-text .heading span {
+  color: #00dfc4;
+}
+
+.about-text h3 {
+  font-size: 1.5em;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.about-text p {
+  font-size: 1.1em;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.about-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.info-box {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+
+.info-box:hover {
+  transform: translateY(-10px);
+}
+
+.info-box i {
+  font-size: 2em;
+  color: #00dfc4;
+  margin-bottom: 15px;
+}
+
+.info-box h5 {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.info-box p {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0;
+}
+
+/* About Section Night Mode */
+.about.night {
+  background: #333;
+}
+
+.about.night .daynight {
+  color: #fff;
+  background-color: #444;
+}
+
+.about.night .daynight ion-icon:nth-child(1) {
+  display: block !important;
+}
+
+.about.night .daynight ion-icon:nth-child(2) {
+  display: none !important;
+}
+
+.about .daynight ion-icon:nth-child(1) {
+  display: none !important;
+}
+
+.about .daynight ion-icon:nth-child(2) {
+  display: block !important;
+}
+
+.contact {
+  min-height: 100vh;
+  padding: 5rem 9% 2rem;
+  background: var(--bg-color);
+  transition: 0.5s ease;
+  position: relative;
+}
+
+.contact.night {
+  background: #333;
+}
+.contact .daynight {
+  position: absolute; /* Change to absolute */
+  bottom: 2rem; /* Position from bottom */
+  right: 2rem; /* Position from right */
+  margin: 0; /* Remove any margins */
+}
+.contact.night .heading,
+.contact.night h3,
+.contact.night p {
+  color: #fff;
+}
+
+.contact.night .info-box {
+  background: #444;
+}
+
+.contact.night .info-box h5,
+.contact.night .info-box a {
+  color: #fff;
+}
+
+.contact.night .contact-form input,
+.contact.night .contact-form textarea {
+  background: #444;
+  color: #fff;
+}
+
+.contact.night .contact-form input::placeholder,
+.contact.night .contact-form textarea::placeholder {
+  color: #ccc;
+}
+
+.contact-text .heading {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-text .heading span {
+  color: var(--main-color);
+}
+
+.contact-text h3 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.contact-text p {
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.contact-info .info-box {
+  background: var(--second-bg-color);
+  padding: 2rem;
+  text-align: center;
+  border-radius: 1rem;
+  transition: 0.5s ease;
+}
+
+.contact-info .info-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+}
+
+.contact-info .info-box i {
+  font-size: 2.5rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.contact-info .info-box h5 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info .info-box a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: 0.3s ease;
+}
+
+.contact-info .info-box a:hover {
+  color: var(--main-color);
+}
+
+.contact-form {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.contact-form .input-box {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form .input-box input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1rem;
+  background: var(--second-bg-color);
+  border: none;
+  border-radius: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.contact-form .input-box input:focus,
+.contact-form textarea:focus {
+  box-shadow: 0 0 1rem var(--main-color);
+}
+
+.contact-form textarea {
+  resize: none;
+  height: 15rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form .btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background: var(--main-color);
+  border-radius: 4rem;
+  color: var(--second-bg-color);
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.contact-form .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 1rem var(--main-color);
+}
+
+@media (max-width: 768px) {
+  .contact-form .input-box {
+    flex-direction: column;
+  }
+
+  .contact-text .heading {
+    font-size: 2.5rem;
+  }
+
+  .contact-text h3 {
+    font-size: 1.8rem;
+  }
+}
