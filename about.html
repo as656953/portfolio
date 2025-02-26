@@ -12,6 +12,15 @@
   </head>
   <body>
     <section id="about" class="about">
+      <header>
+        <a href="index.html" class="logo">Aditya's Portfolio</a>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </header>
       <div class="about-content">
         <div class="about-text">
           <h2 class="heading">About <span>Me</span></h2>
@@ -42,10 +51,6 @@
           </div>
         </div>
       </div>
-      <div class="daynight">
-        <ion-icon name="sunny-outline" style="display: none"></ion-icon>
-        <ion-icon name="moon-outline" style="display: block"></ion-icon>
-      </div>
     </section>
     <script
       type="module"
@@ -57,18 +62,5 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <script src="script.js"></script>
-    <script>
-      const dayNightToggle = document.querySelector(".daynight");
-      const sunIcon = dayNightToggle.querySelector('[name="sunny-outline"]');
-      const moonIcon = dayNightToggle.querySelector('[name="moon-outline"]');
-
-      dayNightToggle.addEventListener("click", function () {
-        document.querySelector(".about").classList.toggle("night");
-        sunIcon.style.display =
-          sunIcon.style.display === "none" ? "block" : "none";
-        moonIcon.style.display =
-          moonIcon.style.display === "none" ? "block" : "none";
-      });
-    </script>
   </body>
 </html>

@@ -12,6 +12,15 @@
   </head>
   <body>
     <section id="home" class="home">
+      <header>
+        <a href="index.html" class="logo">Aditya's Portfolio</a>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </header>
       <div class="home-content">
         <div class="home-img">
           <img
@@ -22,20 +31,16 @@
         <div class="home-text">
           <h3>Hi, I'm</h3>
           <h1>Aditya Singh</h1>
-          <h3>And I'm a <span class="text"></span></h3>
+          <h3>And I'm a <span class="typetext"></span></h3>
           <p>
             I'm a passionate developer focused on creating innovative solutions.
             Welcome to my portfolio where I showcase my projects and skills.
           </p>
           <div class="home-buttons">
-            <a href="#projects" class="btn">View Projects</a>
+            <a href="project.html" class="btn">View Projects</a>
             <a href="contact.html" class="btn">Contact Me</a>
           </div>
         </div>
-      </div>
-      <div class="daynight">
-        <ion-icon name="sunny-outline" style="display: none"></ion-icon>
-        <ion-icon name="moon-outline" style="display: block"></ion-icon>
       </div>
     </section>
     <script
@@ -48,21 +53,8 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <script>
-      // Initialize dark mode functionality
-      const dayNightToggle = document.querySelector(".daynight");
-      const sunIcon = dayNightToggle.querySelector('[name="sunny-outline"]');
-      const moonIcon = dayNightToggle.querySelector('[name="moon-outline"]');
-
-      dayNightToggle.addEventListener("click", function () {
-        document.querySelector(".home").classList.toggle("night");
-        sunIcon.style.display =
-          sunIcon.style.display === "none" ? "block" : "none";
-        moonIcon.style.display =
-          moonIcon.style.display === "none" ? "block" : "none";
-      });
-
       // Initialize Typed.js
-      let typed = new Typed(".text", {
+      let typed = new Typed(".typetext", {
         strings: ["Frontend Developer", "UI/UX Designer", "Problem Solver"],
         typeSpeed: 100,
         backSpeed: 100,

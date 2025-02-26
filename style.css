@@ -596,7 +596,7 @@ header ul li a:hover {
 }
 
 .contact-text .heading span {
-  color: var(--main-color);
+  color: #00dfc4;
 }
 
 .contact-text h3 {
@@ -719,4 +719,193 @@ header ul li a:hover {
   .contact-text h3 {
     font-size: 1.8rem;
   }
+}
+.projects {
+  min-height: 100vh;
+  padding: 100px;
+  background: #f8f8f8;
+  transition: 0.5s;
+  position: relative;
+}
+
+.projects-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-text {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.projects-text .heading {
+  font-size: 3.5em;
+  font-weight: 900;
+  color: #1b322f;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.projects-text .heading span {
+  color: #00dfc4;
+}
+
+.projects-text p {
+  font-size: 1.1em;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.project-img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.project-card:hover .project-img img {
+  transform: scale(1.1);
+}
+
+.project-info {
+  padding: 20px;
+}
+
+.project-info h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.project-info p {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.project-tag {
+  background: #1b322f;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+}
+
+.project-links a {
+  color: #1b322f;
+  font-size: 1.2em;
+  transition: 0.3s;
+}
+
+.project-links a:hover {
+  color: #00dfc4;
+}
+
+/* Night mode styles */
+.projects.night {
+  background: #333;
+}
+
+.projects.night .projects-text .heading {
+  color: #fff;
+}
+
+.projects.night .projects-text p {
+  color: #ccc;
+}
+
+.projects.night .project-card {
+  background: #444;
+}
+
+.projects.night .project-info h3 {
+  color: #fff;
+}
+
+.projects.night .project-info p {
+  color: #ccc;
+}
+
+.projects.night .project-links a {
+  color: #fff;
+}
+
+.projects.night .project-links a:hover {
+  color: #00dfc4;
+}
+
+/* Header dark mode styles for projects section */
+.projects.night header .logo {
+  color: #fff;
+}
+
+.projects.night header ul li a {
+  color: #fff;
+}
+
+.projects.night header ul li a:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Header dark mode styles for all sections */
+.home.night header .logo,
+.about.night header .logo,
+.contact.night header .logo,
+.projects.night header .logo {
+  color: #fff;
+}
+
+.home.night header ul li a,
+.about.night header ul li a,
+.contact.night header ul li a,
+.projects.night header ul li a {
+  color: #fff;
+}
+
+.home.night header ul li a:hover,
+.about.night header ul li a:hover,
+.contact.night header ul li a:hover,
+.projects.night header ul li a:hover {
+  background-color: #fff;
+  color: #333;
 }
