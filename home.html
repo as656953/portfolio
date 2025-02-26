@@ -14,6 +14,9 @@
     <section id="home" class="home">
       <header>
         <a href="index.html" class="logo">Aditya's Portfolio</a>
+        <div class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
         <ul>
           <li><a href="home.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -42,25 +45,30 @@
           </div>
         </div>
       </div>
+      
     </section>
+
+    <!-- Scripts -->
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="script.js"></script>
     <script>
-      // Initialize Typed.js
-      let typed = new Typed(".typetext", {
-        strings: ["Frontend Developer", "UI/UX Designer", "Problem Solver"],
-        typeSpeed: 100,
-        backSpeed: 100,
-        loop: true,
+      // Initialize Typed.js after the DOM is loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        let typed = new Typed(".typetext", {
+          strings: ["Frontend Developer", "UI/UX Designer", "Problem Solver"],
+          typeSpeed: 100,
+          backSpeed: 100,
+          loop: true,
+        });
       });
     </script>
-    <script src="script.js"></script>
   </body>
 </html>

@@ -1,3 +1,54 @@
+// Hamburger Menu
+document.addEventListener('DOMContentLoaded', function() {
+  const menuBtn = document.querySelector('.menu-btn');
+  const navigation = document.querySelector('header ul');
+
+  if (menuBtn && navigation) {
+    // Initialize menu state
+    const updateMenuIcon = (isActive) => {
+      const icon = menuBtn.querySelector('i');
+      if (isActive) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    };
+
+    // Toggle menu
+    menuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigation.classList.toggle('active');
+      updateMenuIcon(navigation.classList.contains('active'));
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('header ul li a').forEach(link => {
+      link.addEventListener('click', () => {
+        navigation.classList.remove('active');
+        updateMenuIcon(false);
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navigation.contains(e.target) && !menuBtn.contains(e.target)) {
+        navigation.classList.remove('active');
+        updateMenuIcon(false);
+      }
+    });
+
+    // Close menu when pressing escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navigation.classList.contains('active')) {
+        navigation.classList.remove('active');
+        updateMenuIcon(false);
+      }
+    });
+  }
+});
 // Only add event listener if daynight button exists (index.html)
 const daynightButton = document.querySelector(".daynight");
 if (daynightButton) {
@@ -83,3 +134,4 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
   });
 });
+
