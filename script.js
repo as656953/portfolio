@@ -1,49 +1,49 @@
 // Hamburger Menu
-document.addEventListener('DOMContentLoaded', function() {
-  const menuBtn = document.querySelector('.menu-btn');
-  const navigation = document.querySelector('header ul');
+document.addEventListener("DOMContentLoaded", function () {
+  const menuBtn = document.querySelector(".menu-btn");
+  const navigation = document.querySelector("header ul");
 
   if (menuBtn && navigation) {
     // Initialize menu state
     const updateMenuIcon = (isActive) => {
-      const icon = menuBtn.querySelector('i');
+      const icon = menuBtn.querySelector("i");
       if (isActive) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
       } else {
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-times");
       }
     };
 
     // Toggle menu
-    menuBtn.addEventListener('click', (e) => {
+    menuBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      navigation.classList.toggle('active');
-      updateMenuIcon(navigation.classList.contains('active'));
+      navigation.classList.toggle("active");
+      updateMenuIcon(navigation.classList.contains("active"));
     });
 
     // Close menu when clicking a link
-    document.querySelectorAll('header ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        navigation.classList.remove('active');
+    document.querySelectorAll("header ul li a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navigation.classList.remove("active");
         updateMenuIcon(false);
       });
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!navigation.contains(e.target) && !menuBtn.contains(e.target)) {
-        navigation.classList.remove('active');
+        navigation.classList.remove("active");
         updateMenuIcon(false);
       }
     });
 
     // Close menu when pressing escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navigation.classList.contains('active')) {
-        navigation.classList.remove('active');
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && navigation.classList.contains("active")) {
+        navigation.classList.remove("active");
         updateMenuIcon(false);
       }
     });
@@ -89,8 +89,8 @@ window.addEventListener("load", () => {
 // Download resume functionality
 document.querySelector(".download-btn")?.addEventListener("click", () => {
   const link = document.createElement("a");
-  link.href = "resume.pdf";
-  link.download = "resume.pdf";
+  link.href = "Aditya_Singh_Resume.pdf";
+  link.download = "Aditya_Singh_Resume.pdf";
   link.click();
 });
 
@@ -134,4 +134,3 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
   });
 });
-
