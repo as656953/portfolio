@@ -54,7 +54,7 @@ header ul li a:hover {
 }
 .content {
   position: relative;
-  max-width: 700;
+  max-width: 700px;
 }
 .content h2 {
   color: #333;
@@ -82,6 +82,7 @@ header ul li a:hover {
   font-size: 1.25em;
   cursor: pointer;
   transition: 0.5s;
+  margin: 10px 10px 10px 0;
 }
 .content button:hover {
   background-color: #00dfc4;
@@ -782,6 +783,32 @@ textarea:focus {
     width: 100%;
     padding: 12px 20px;
   }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content .social-links {
+    justify-content: center;
+    display: flex;
+  }
+
+  .content .buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .content button {
+    margin: 5px;
+    padding: 8px 20px;
+    font-size: 1.1em;
+  }
 }
 
 @media (max-width: 480px) {
@@ -817,6 +844,11 @@ textarea:focus {
 
   textarea {
     min-height: 150px;
+  }
+
+  .content button {
+    padding: 8px 15px;
+    font-size: 1em;
   }
 }
 
@@ -1275,7 +1307,8 @@ textarea:focus {
   }
 
   @keyframes floatMobile {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
