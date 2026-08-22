@@ -1,0 +1,903 @@
+/* ==========================================================================
+   4-SECTIONS — hero, ticker, about, skills, work, journey, contact
+   Section rhythm is deliberately UNEQUAL. Equal 100px padding on every
+   section is exactly what made the old site feel flat.
+   ========================================================================== */
+
+.section {
+  padding-block: clamp(80px, 9vw, 140px);
+}
+
+.section__head {
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+
+.section__head h2,
+.about__rail h2,
+.skills__head h2 {
+  margin-top: var(--s-3);
+}
+
+/* shared bits ------------------------------------------------------------- */
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--r-full);
+  flex: none;
+  vertical-align: middle;
+}
+
+.dot--filled { background: var(--accent-mark); }
+.dot--hollow { border: 1px solid var(--border-strong); }
+
+.dot--live {
+  background: var(--accent-mark);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-mark) 22%, transparent);
+}
+
+/* mono key/value list with dotted leaders — the most recruiter-useful
+   object on the page, and nearly free to build */
+.ledger {
+  margin-top: var(--s-6);
+  display: grid;
+  gap: var(--s-3);
+}
+
+.ledger__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+.ledger dt {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ledger__row::after {
+  content: "";
+  order: 1;
+  flex: 1 1 auto;
+  min-width: var(--s-4);
+  height: 0;
+  border-bottom: 1px dotted var(--border-strong);
+  opacity: 0.6;
+  transform: translateY(-0.28em);
+}
+
+.ledger dd {
+  order: 2;
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-primary);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.ledger dd a {
+  border-bottom: 1px solid var(--border-strong);
+  transition: color var(--dur-fast) var(--ease-out-quart),
+              border-color var(--dur-fast) var(--ease-out-quart);
+}
+
+.ledger dd a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: var(--s-1) var(--s-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-1);
+  color: var(--text-muted);
+  font-size: var(--fs-index);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ==================================================================== HERO */
+
+.hero {
+  padding-top: clamp(48px, 7vw, 88px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  /* svh, not vh — iOS Safari's collapsing URL bar clips the CTAs otherwise */
+  min-height: min(100svh, 920px);
+  display: flex;
+  align-items: center;
+}
+
+.hero__grid {
+  width: 100%;
+  align-items: center;
+  row-gap: var(--s-8);
+}
+
+.hero__text { grid-column: 1 / -1; }
+.hero__figure { grid-column: 1 / -1; }
+
+@media (min-width: 1024px) {
+  .hero__text   { grid-column: 1 / span 7; }
+  .hero__figure { grid-column: 8 / span 5; }
+}
+
+.hero__eyebrow {
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: center;
+}
+
+.hero__status { color: var(--accent); }
+
+.hero__name {
+  margin-block: var(--s-5) var(--s-5);
+  max-width: 12ch;
+}
+
+/* each line rides in a clip mask — the one key motion of this viewport */
+.hero__line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__line-in { display: block; }
+
+.hero__role {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--fs-lead);
+  color: var(--text-secondary);
+  max-width: none;
+}
+
+.hero__role-label {
+  color: var(--text-muted);
+  flex: none;
+}
+
+/* a masked word slot, cycled by js/roleCycle.js — no typewriter, no cursor.
+   Height is locked to one line so nothing below it ever shifts. */
+.role-cycle {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 1.5em;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.role-cycle__static {
+  display: block;
+  height: 1.5em;
+  line-height: 1.5em;
+  white-space: nowrap;
+  color: var(--text-primary);
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+  transform: translateY(calc(var(--role-index, 0) * -1.5em));
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-7);
+}
+
+.hero__socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--border);
+}
+
+.hero__socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease-out-quart);
+}
+
+.hero__socials a:hover { color: var(--accent); }
+
+/* portrait ---------------------------------------------------------------
+   The source is 577x433 with matte fringing from the background removal and
+   a mid-torso crop. Capping the width and bottom-aligning it inside a
+   bordered plate makes the crop read as a deliberate cut-out; the mask
+   dissolves the ragged bottom edge into the plate. */
+
+.hero__figure {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-4);
+}
+
+.hero__tagline {
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex: none;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  align-self: flex-end;
+  margin-bottom: var(--s-5);
+}
+
+@media (max-width: 1023px) {
+  .hero__tagline {
+    writing-mode: horizontal-tb;
+    rotate: none;
+    margin-bottom: 0;
+    align-self: center;
+  }
+  .hero__figure { flex-direction: column-reverse; align-items: flex-start; }
+}
+
+.portrait {
+  margin: 0;
+  max-width: 380px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--s-3) var(--s-3) var(--s-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.portrait__img {
+  width: 100%;
+  height: auto;
+  /* The cut-out is 577x433 landscape with the subject centred and dead
+     space on all sides. A square frame with cover crops the empty flanks
+     and scales the subject up without upscaling the source (380/433 ≈ 0.88). */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 42%;
+  /* unify skin tones with the palette and soften the cut-out fringe */
+  filter: grayscale(0.35) contrast(1.06);
+  transition: filter var(--dur-slow) var(--ease-out-quart);
+  mask-image: linear-gradient(to top, transparent 0, #000 6%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0, #000 6%);
+}
+
+.portrait:hover .portrait__img,
+.portrait:focus-within .portrait__img {
+  filter: grayscale(0) contrast(1);
+}
+
+.portrait__caption {
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--border);
+}
+
+/* ================================================================== TICKER */
+
+.ticker {
+  border-block: 1px solid var(--border);
+  background: var(--surface-elev);
+  overflow: hidden;
+  padding-block: var(--s-3);
+}
+
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 34s linear infinite;
+}
+
+.ticker:hover .ticker__track,
+.ticker:focus-within .ticker__track {
+  animation-play-state: paused;
+}
+
+.ticker__set {
+  color: var(--text-muted);
+  padding-right: var(--s-5);
+  white-space: nowrap;
+}
+
+.ticker__set i {
+  color: var(--accent-mark);
+  font-style: normal;
+  padding-inline: var(--s-2);
+}
+
+@keyframes ticker-slide {
+  to { transform: translateX(-50%); }
+}
+
+/* the static version is a designed state, not an absence of one: same
+   content, same seam, no travel */
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .ticker__set { white-space: normal; }
+  .ticker__set:last-child { display: none; }
+}
+
+/* =================================================================== ABOUT */
+
+.about__rail { grid-column: 1 / -1; }
+.about__body { grid-column: 1 / -1; }
+
+@media (min-width: 1024px) {
+  .about__rail {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-6));
+    /* without this the grid item stretches to full row height and sticky
+       silently does nothing — the classic sticky-in-grid trap */
+    align-self: start;
+  }
+  .about__body { grid-column: 6 / span 7; }
+}
+
+.about__body > p + p { margin-top: var(--s-4); }
+
+/* three ruled rows, not icon-in-circle boxes */
+.pillars {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-8) 0 0;
+}
+
+.pillar {
+  position: relative;
+  border-top: 1px solid var(--border);
+  padding-block: var(--s-5);
+  padding-left: var(--s-6);
+}
+
+.pillar::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: var(--s-5);
+  height: 2px;
+  background: var(--accent-mark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
+
+.pillar.is-revealed::before { transform: scaleX(1); }
+
+.pillar__num {
+  position: absolute;
+  left: 0;
+  top: var(--s-5);
+}
+
+.pillar__title { margin-bottom: var(--s-2); }
+
+.pillar__desc {
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+}
+
+/* ================================================================== SKILLS */
+
+/* full-bleed band with hairlines top and bottom */
+.skills {
+  background: var(--surface-elev);
+  border-block: 1px solid var(--border);
+  padding-block: clamp(72px, 8vw, 120px);
+}
+
+.skills__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s-5);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.skills__legend {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--text-muted);
+}
+
+.skills__legend .dot { margin-left: var(--s-3); }
+.skills__legend .dot:first-child { margin-left: 0; }
+
+.skill-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-3);
+  border-top: 1px solid var(--border);
+  padding-block: var(--s-5);
+}
+
+@media (min-width: 768px) {
+  .skill-group {
+    grid-template-columns: 14rem 1fr;
+    gap: var(--s-6);
+    align-items: baseline;
+  }
+}
+
+.skill-group__label { color: var(--text-muted); }
+
+/* skills set at h3 size — a typographic index, not a badge soup.
+   No percentage bars: nobody believes "React 87%". */
+.skill-group__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-group__list li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  position: relative;
+  font-size: var(--fs-h3);
+  font-weight: 550;
+  letter-spacing: var(--track-tight);
+}
+
+.skill-group__list li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: var(--accent-mark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+
+.skill-group__list li:hover::after { transform: scaleX(1); }
+
+/* ==================================================================== WORK */
+
+.work { padding-bottom: clamp(72px, 8vw, 120px); }
+
+.project {
+  padding-block: clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--border);
+}
+
+.project__grid {
+  align-items: start;
+  row-gap: var(--s-6);
+}
+
+.project__index { grid-column: 1 / -1; display: flex; gap: var(--s-4); }
+.project__body  { grid-column: 1 / -1; }
+.frame          { grid-column: 1 / -1; }
+
+@media (min-width: 1024px) {
+  .project__index {
+    grid-column: 1 / span 2;
+    flex-direction: column;
+    gap: var(--s-2);
+    /* pinned feel with zero JS */
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-6));
+    align-self: start;
+  }
+  .project__body { grid-column: 3 / span 4; }
+  .frame         { grid-column: 7 / span 6; }
+}
+
+.project__title {
+  font-size: var(--fs-h2);
+  font-weight: 650;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.project__title-alt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.project__desc {
+  margin-top: var(--s-4);
+  color: var(--text-secondary);
+}
+
+.project__body .tags { margin-top: var(--s-5); }
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  margin-top: var(--s-5);
+}
+
+.project__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: var(--s-0);
+  transition: color var(--dur-fast) var(--ease-out-quart),
+              border-color var(--dur-fast) var(--ease-out-quart);
+}
+
+.project__links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* the frame ---------------------------------------------------------------
+   The three screenshots are chromatically incompatible (violet, white/green,
+   teal) and all wide partial crops (3.9:1, 2.7:1, 2.56:1). A fixed 16:7
+   frame plus a mono browser-chrome bar makes them one visual system, proves
+   the projects actually ship, and puts a live URL in the scan path. */
+
+.frame {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--s-2);
+  transition: border-color var(--dur-base) var(--ease-out-quart);
+}
+
+.frame:hover { border-color: var(--border-strong); }
+
+.frame__chrome {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  height: 28px;
+  padding-inline: var(--s-2);
+  color: var(--text-muted);
+  font-size: var(--fs-index);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  overflow: hidden;
+}
+
+.frame__dots {
+  display: flex;
+  gap: 5px;
+  flex: none;
+}
+
+.frame__dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--border-strong);
+  opacity: 0.65;
+}
+
+.frame__url,
+.frame__cta {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+
+.frame__cta {
+  position: absolute;
+  opacity: 0;
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.frame__chrome { position: relative; }
+.frame__cta { left: calc(var(--s-2) + 34px); }
+
+.frame:hover .frame__url,
+.frame:focus-visible .frame__url { opacity: 0; }
+
+.frame:hover .frame__cta,
+.frame:focus-visible .frame__cta { opacity: 1; }
+
+.frame__shot {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 7;
+  background: var(--surface-elev);
+}
+
+.frame__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: saturate(0.72);
+  transition: transform var(--dur-slow) var(--ease-out-quart),
+              filter var(--dur-slow) var(--ease-out-quart);
+}
+
+.frame:hover .frame__shot img,
+.frame:focus-visible .frame__shot img {
+  transform: scale(1.03);
+  filter: saturate(1);
+}
+
+/* controlled irregularity: P01 and P03 bleed past the right gutter to the
+   viewport edge; P02 stays inset. Stops the scroll feeling metronomic. */
+@media (min-width: 1024px) {
+  .project--bleed .frame {
+    margin-right: calc(var(--gutter) * -1);
+    border-right: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .project--bleed .frame {
+    margin-right: calc((100vw - var(--w-page)) / -2 - var(--gutter));
+  }
+}
+
+/* also built -------------------------------------------------------------- */
+
+.also__head {
+  padding-top: var(--s-8);
+  border-top: 1px solid var(--border);
+  margin-bottom: var(--s-6);
+}
+
+.also {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--s-6);
+}
+
+@media (min-width: 768px) {
+  .also { grid-template-columns: repeat(2, 1fr); gap: var(--s-8); }
+}
+
+.also__item {
+  position: relative;
+  padding-left: var(--s-7);
+}
+
+.also__num {
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+}
+
+.also__title {
+  font-size: var(--fs-h3);
+  font-weight: 550;
+  margin-bottom: var(--s-2);
+}
+
+.also__desc {
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  margin-bottom: var(--s-4);
+}
+
+/* ================================================================= JOURNEY */
+
+/* two entries is too few for a dot-and-line timeline — it looks sparse.
+   A resume-set ledger is also what recruiters read fastest. */
+.entries {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: entry;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-3);
+  border-top: 1px solid var(--border);
+  padding-block: clamp(28px, 3.5vw, 52px);
+  padding-inline: var(--s-4);
+  margin-inline: calc(var(--s-4) * -1);
+  transition: background var(--dur-base) var(--ease-out-quart);
+}
+
+.entry:last-child { border-bottom: 1px solid var(--border); }
+
+.entry:hover { background: var(--surface-elev); }
+
+@media (min-width: 768px) {
+  .entry {
+    grid-template-columns: 14rem 1fr auto;
+    gap: var(--s-6);
+    align-items: start;
+  }
+}
+
+.entry__date {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out-quart);
+}
+
+.entry:hover .entry__date { color: var(--accent); }
+
+.entry__title { margin-bottom: var(--s-1); }
+
+.entry__org {
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  margin-bottom: var(--s-3);
+}
+
+.entry__detail {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  max-width: 56ch;
+}
+
+.entry__tag {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .entry__tag { text-align: right; }
+}
+
+/* ================================================================= CONTACT */
+
+.contact__intro    { grid-column: 1 / -1; }
+.contact__form-wrap { grid-column: 1 / -1; margin-top: var(--s-8); }
+
+@media (min-width: 1024px) {
+  .contact__intro     { grid-column: 1 / span 5; }
+  .contact__form-wrap { grid-column: 7 / span 6; margin-top: 0; }
+}
+
+.contact__display {
+  font-size: var(--fs-h1);
+  margin-block: var(--s-3) var(--s-6);
+}
+
+.contact__email {
+  display: inline-block;
+  font-size: var(--fs-h3);
+  font-weight: 550;
+  letter-spacing: var(--track-tight);
+  word-break: break-word;
+  position: relative;
+  padding-bottom: var(--s-1);
+}
+
+.contact__email::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent-mark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out-quart);
+}
+
+.contact__email:hover::after { transform: scaleX(1); }
+
+.contact__availability {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+  color: var(--text-muted);
+}
+
+/* form --------------------------------------------------------------------
+   Underline-only fields with an always-visible mono label above. Never
+   placeholder-as-label — the most common a11y failure in portfolio forms. */
+
+.form {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.field {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.field label {
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease-out-quart);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border-strong);
+  border-radius: 0;
+  padding: var(--s-2) 0;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  transition: border-color var(--dur-fast) var(--ease-out-quart);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.55;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--accent);
+  padding-bottom: calc(var(--s-2) - 1px);
+}
+
+.field:focus-within label { color: var(--accent); }
+
+/* keyboard users still get a real ring */
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-bottom-color: var(--accent);
+}
+
+.form__status {
+  min-height: 1.4em;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.form__status[data-state="error"] { color: var(--accent); }
+.form__status[data-state="ok"] { color: var(--accent); }
+
+/* ============================================================ RESPONSIVE */
+
+@media (max-width: 479px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero__actions { gap: var(--s-2); }
+}

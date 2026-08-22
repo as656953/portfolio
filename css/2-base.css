@@ -1,0 +1,265 @@
+/* ==========================================================================
+   2-BASE — reset, element defaults, typography, a11y utilities
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  /* scroll-padding-top is what stops the sticky header covering the heading
+     you just jumped to — the single most common one-page-site bug. */
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--s-5));
+  /* stable gutter at all times so locking scroll for the drawer never
+     shifts the layout sideways on desktop */
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background var(--dur-base) var(--ease-inout-quad),
+              color var(--dur-base) var(--ease-inout-quad);
+}
+
+/* lock page scroll while the mobile drawer is open (CSS, not JS — the
+   position:fixed technique loses scroll position and fights smooth scroll) */
+html.is-nav-open,
+html.is-nav-open body {
+  overflow: hidden;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- headings ------------------------------------------------------------ */
+
+h1, h2, h3, h4 {
+  font-weight: 650;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--fs-h1); font-weight: 700; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); font-weight: 550; line-height: var(--lh-snug); }
+
+p {
+  text-wrap: pretty;
+  max-width: var(--w-prose);
+}
+
+::selection {
+  background: var(--accent-subtle-bg);
+  color: var(--text-primary);
+}
+
+/* ---- Devanagari ---------------------------------------------------------
+   सहायम् is a real project title and neither Archivo nor IBM Plex Mono covers
+   Devanagari. Rather than pull a 54 KB webfont subset for one word, name the
+   system faces explicitly so the fallback is deliberate instead of accidental. */
+:lang(sa),
+:lang(hi) {
+  font-family: var(--font-deva);
+}
+
+/* ==========================================================================
+   TYPE UTILITIES
+   ========================================================================== */
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.mono-index {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-index);
+  letter-spacing: var(--track-index);
+  text-transform: uppercase;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  max-width: var(--w-lead);
+  color: var(--text-secondary);
+}
+
+.display {
+  font-size: var(--fs-display);
+  font-weight: 800;
+  line-height: var(--lh-display);
+  letter-spacing: var(--track-display);
+}
+
+/* ==========================================================================
+   LAYOUT PRIMITIVES
+   12 cols ≥1024px · 6 cols 640–1023px · 4 cols <640px.
+   Sections place themselves with grid-column spans rather than nested flex.
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--w-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--col-gap);
+}
+
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
+
+.bleed {
+  width: 100%;
+}
+
+/* ==========================================================================
+   ICONS — one inline SVG sprite, stroke: currentColor so icons inherit the
+   theme for free (this replaces ~12 `.night … i { color: #fff }` rules).
+   ========================================================================== */
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.icon--brand {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+/* clip-path variant: unlike display:none it stays screen-reader visible, and
+   unlike text-indent:-9999px it creates no scrollable overflow area */
+.visually-hidden:not(:focus):not(:active) {
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--r-1);
+}
+
+/* only suppress the default ring where we draw our own */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--s-3);
+  left: var(--s-3);
+  z-index: var(--z-skip);
+  padding: var(--s-3) var(--s-4);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Windows High Contrast Mode drops background-color, so anything conveyed
+   purely by a fill disappears. Restore it with system colours. */
+@media (forced-colors: active) {
+  .nav__link[aria-current]::after { background: Highlight; }
+  .btn { border: 1px solid ButtonText; }
+  .icon { stroke: CanvasText; }
+}

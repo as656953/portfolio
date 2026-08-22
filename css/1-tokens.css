@@ -1,0 +1,191 @@
+/* ==========================================================================
+   1-TOKENS — design tokens
+   Two layers: a raw palette (never referenced by components) and semantic
+   tokens (the only thing components use). Dark mode swaps ~16 semantic
+   values instead of duplicating every rule.
+   ========================================================================== */
+
+:root {
+  /* ---- raw palette — do NOT use directly in components ------------------ */
+  --paper:        #fafaf8;
+  --paper-white:  #ffffff;
+  --paper-elev:   #f1f0ec;
+  --paper-rule:   #e3e2dc;
+  --paper-rule-2: #8c8c85;
+  --ink-900:      #16181a;
+  --ink-700:      #43484b;
+  --ink-500:      #62686b;
+
+  --night-900:    #0e1112;
+  --night-800:    #171b1c;
+  --night-700:    #1f2426;
+  --night-rule:   #262c2e;
+  --night-rule-2: #5e6a6c;
+  --snow-100:     #ecefee;
+  --snow-300:     #a7afad;
+  --snow-500:     #8a9492;
+
+  --teal-mark:    #00dfc4; /* brand teal — decorative marks only in light   */
+  --teal-ink:     #00695c; /* 6.33:1 on paper — accent TEXT in light        */
+  --teal-ink-2:   #004f45; /* 9.12:1 on paper — hover                       */
+  --teal-tint:    #dff3ef;
+  --teal-lift:    #5cf2de;
+  --teal-shade:   #06312c;
+  --teal-on:      #062b26;
+
+  /* ---- semantic: LIGHT --------------------------------------------------
+     Every text-on-background pair below is measured. Nothing under 4.5:1
+     carries text; nothing under 3:1 carries a control border.             */
+  --bg:               var(--paper);        /* warm paper, not clinical grey */
+  --surface:          var(--paper-white);
+  --surface-elev:     var(--paper-elev);
+  --border:           var(--paper-rule);   /* decorative hairlines only     */
+  --border-strong:    var(--paper-rule-2); /* 3.24:1 — control borders      */
+  --text-primary:     var(--ink-900);      /* 17.03:1 AAA                   */
+  --text-secondary:   var(--ink-700);      /*  8.86:1 AAA                   */
+  --text-muted:       var(--ink-500);      /*  5.41:1 AA at all sizes       */
+  --accent:           var(--teal-ink);     /*  6.33:1 AA                    */
+  --accent-hover:     var(--teal-ink-2);   /*  9.12:1 AAA                   */
+  --accent-mark:      var(--teal-mark);    /*  1.63:1 — NEVER text          */
+  --accent-subtle-bg: var(--teal-tint);
+  --on-accent:        var(--paper-white);  /*  6.61:1 on --accent           */
+  --focus:            var(--teal-ink);
+
+  /* the footer plate is inverted in BOTH themes — it is the page's last beat */
+  --plate-bg:   var(--night-900);
+  --plate-text: var(--snow-100);
+  --plate-mute: var(--snow-500);
+  --plate-rule: #2a3133;
+
+  color-scheme: light;
+
+  /* ---- spacing — 4px base. Nothing outside this scale, ever. ------------ */
+  --s-0: 2px;   --s-1: 4px;   --s-2: 8px;   --s-3: 12px;
+  --s-4: 16px;  --s-5: 24px;  --s-6: 32px;  --s-7: 48px;
+  --s-8: 64px;  --s-9: 96px;  --s-10: 128px; --s-11: 176px;
+
+  /* ---- layout ----------------------------------------------------------- */
+  --w-page:   1280px;
+  --w-prose:  66ch;
+  --w-lead:   54ch;
+  --gutter:   clamp(20px, 5vw, 72px);
+  --col-gap:  clamp(16px, 2.2vw, 28px);
+  --header-h: 64px;
+
+  /* ---- type ------------------------------------------------------------- */
+  --font-display: "Archivo", "Archivo Fallback", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  /* System Devanagari only. The single word सहायम् does not justify a
+     54 KB webfont subset, and every target OS ships a Devanagari face. */
+  --font-deva:    "Noto Sans Devanagari", "Kohinoor Devanagari", "Nirmala UI",
+                  "Mangal", sans-serif;
+
+  --fs-display:  clamp(2.5rem, 1.17rem + 5.93vw, 6.5rem);
+  --fs-h1:       clamp(2rem, 1.5rem + 2.22vw, 3.5rem);
+  --fs-h2:       clamp(1.625rem, 1.33rem + 1.3vw, 2.5rem);
+  --fs-h3:       clamp(1.25rem, 1.13rem + 0.56vw, 1.625rem);
+  --fs-lead:     clamp(1.125rem, 1.06rem + 0.28vw, 1.3125rem);
+  --fs-body:     clamp(1rem, 0.98rem + 0.09vw, 1.0625rem);
+  --fs-small:    0.875rem;
+  --fs-label:    0.8125rem;
+  --fs-index:    0.75rem;
+
+  --lh-display: 0.92;
+  --lh-tight:   1.08;
+  --lh-snug:    1.25;
+  --lh-body:    1.65;
+
+  --track-display: -0.035em;
+  --track-tight:   -0.02em;
+  --track-label:    0.09em;
+  --track-index:    0.12em;
+
+  /* ---- radii — deliberately near-zero. No 15px shadow cards. ------------ */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-full: 999px;
+
+  /* ---- motion ----------------------------------------------------------- */
+  --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);      /* default entrance */
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);      /* large reveals    */
+  --ease-inout-quad:  cubic-bezier(0.45, 0, 0.55, 1);     /* toggles          */
+  --ease-spring-soft: cubic-bezier(0.34, 1.28, 0.64, 1);  /* button release   */
+
+  --dur-instant: 120ms;
+  --dur-fast:    200ms;
+  --dur-base:    320ms;
+  --dur-slow:    560ms;
+  --dur-reveal:  780ms;
+  --stagger:      70ms;
+
+  /* ---- layering --------------------------------------------------------- */
+  --z-base:     0;
+  --z-sticky:  10;
+  /* the scrim sits BELOW the header so the bar (and its close button) stays
+     crisp and clickable while the drawer is open. The header is a sticky,
+     z-indexed element, so it forms a stacking context — anything inside it,
+     drawer included, is trapped beneath --z-header no matter its own value. */
+  --z-scrim:   90;
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-progress: 300;
+  --z-skip:   400;
+}
+
+/* ---- semantic: DARK ------------------------------------------------------
+   Hand-tuned, not inverted. The brand teal becomes the PRIMARY accent here
+   at 11.15:1 — dark mode is where #00dfc4 finally gets to be text.
+   --on-accent is a dark teal-black: white on #00dfc4 is 1.7:1 and is the
+   exact failure the old site shipped.                                      */
+[data-theme="dark"] {
+  --bg:               var(--night-900);
+  --surface:          var(--night-800);
+  --surface-elev:     var(--night-700);
+  --border:           var(--night-rule);
+  --border-strong:    var(--night-rule-2); /*  3.39:1                        */
+  --text-primary:     var(--snow-100);     /* 16.38:1 AAA                    */
+  --text-secondary:   var(--snow-300);     /*  8.47:1 AAA                    */
+  --text-muted:       var(--snow-500);     /*  6.08:1 AA                     */
+  --accent:           var(--teal-mark);    /* 11.15:1 AAA                    */
+  --accent-hover:     var(--teal-lift);    /* 13.73:1 AAA                    */
+  --accent-mark:      var(--teal-mark);
+  --accent-subtle-bg: var(--teal-shade);
+  --on-accent:        var(--teal-on);      /*  8.94:1 on --accent            */
+  --focus:            var(--teal-mark);
+
+  --plate-bg:   #090c0d;
+  --plate-rule: #23292b;
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   A designed static state, not a kill switch. Durations go to 1ms rather
+   than 0s so transitionend/animationend still fire and no JS awaiting them
+   can hang. The reveal system's own opacity reset lives in 5-motion.css.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 1ms;
+    --dur-fast:    1ms;
+    --dur-base:    1ms;
+    --dur-slow:    1ms;
+    --dur-reveal:  1ms;
+    --stagger:     0ms;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

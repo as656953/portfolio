@@ -1,0 +1,103 @@
+/* ==========================================================================
+   5-MOTION — reveal system + scroll-driven animation
+   Budget: 1–2 key animated elements per viewport. Entrance travel is 14px
+   for text, 24px for blocks, never more than 32px — long travel is the
+   single loudest "template" tell.
+   ========================================================================== */
+
+/* The `.js` gate is set by the inline head script. Without JS these rules
+   never apply, so every element renders at its final state rather than
+   sitting at opacity:0 forever. */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity var(--dur-slow) var(--ease-out-quart),
+              transform var(--dur-slow) var(--ease-out-quart);
+  /* stagger authored in HTML via --i, capped at 6 so a fast scroller never
+     waits on item 20 */
+  transition-delay: calc(min(var(--i, 0), 6) * var(--stagger));
+}
+
+.js [data-reveal="block"] { transform: translate3d(0, 24px, 0); }
+.js [data-reveal="scale"] { transform: scale(0.97); }
+
+/* the project frames get the section's one hero motion */
+.js [data-reveal="clip"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path var(--dur-reveal) var(--ease-out-expo);
+}
+
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* hero name — each line rises out of its own clip mask */
+.js .hero__line-in {
+  transform: translateY(105%);
+  transition: transform var(--dur-reveal) var(--ease-out-expo);
+}
+
+.js .hero__line:nth-child(2) .hero__line-in { transition-delay: 90ms; }
+
+.js .is-hero-ready .hero__line-in,
+.js .hero.is-revealed .hero__line-in {
+  transform: translateY(0);
+}
+
+/* ---- hero drift ----------------------------------------------------------
+   Purely decorative, so it gets no fallback — browsers without view
+   timelines simply render a static hero, which is fine. Never implement
+   this with a scroll listener: that runs on the main thread and always
+   lags a frame behind the compositor-driven scroll. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .hero__figure {
+      animation: hero-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+    @keyframes hero-drift {
+      to { transform: translateY(-2rem); }
+    }
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   A designed static state. Both the transform AND the opacity fade are
+   removed — a fade with no motion still delays perceived load.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal="clip"] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+
+  .js .hero__line-in {
+    transform: none;
+    transition: none;
+  }
+
+  .pillar::before {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  /* the progress bar stays: it is positional feedback, not decoration */
+
+  /* hover keeps every colour/border change but drops the transforms, so
+     interactions still feel responsive rather than dead */
+  .frame:hover .frame__shot img,
+  .frame:focus-visible .frame__shot img {
+    transform: none;
+  }
+}
