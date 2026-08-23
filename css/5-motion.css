@@ -111,3 +111,10 @@
     transform: none;
   }
 }
+
+/* The JS safety net sets this before force-revealing, so the emergency path
+   has no transition to be caught halfway through. */
+.reveal-instant [data-reveal],
+.reveal-instant .hero__line-in {
+  transition: none !important;
+}
