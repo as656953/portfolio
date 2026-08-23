@@ -1,5 +1,5 @@
 /* ==========================================================================
-   4-SECTIONS — hero, ticker, about, skills, work, journey, contact
+   4-SECTIONS — hero, ticker, about, skills, experience, work, contact
    Section rhythm is deliberately UNEQUAL. Equal 100px padding on every
    section is exactly what made the old site feel flat.
    ========================================================================== */
@@ -127,11 +127,11 @@
 }
 
 .hero__text { grid-column: 1 / -1; }
-.hero__figure { grid-column: 1 / -1; }
+.hero__now  { grid-column: 1 / -1; }
 
 @media (min-width: 1024px) {
-  .hero__text   { grid-column: 1 / span 7; }
-  .hero__figure { grid-column: 8 / span 5; }
+  .hero__text { grid-column: 1 / span 7; }
+  .hero__now  { grid-column: 9 / span 4; }
 }
 
 .hero__eyebrow {
@@ -219,74 +219,52 @@
 
 .hero__socials a:hover { color: var(--accent); }
 
-/* portrait ---------------------------------------------------------------
-   The source is 577x433 with matte fringing from the background removal and
-   a mid-torso crop. Capping the width and bottom-aligning it inside a
-   bordered plate makes the crop read as a deliberate cut-out; the mask
-   dissolves the ragged bottom edge into the plate. */
+/* the "currently" panel ---------------------------------------------------
+   Replaces the old portrait. It earns the column better than a photo did:
+   it answers "what does he do now, and for how long" in the first viewport. */
 
-.hero__figure {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--s-4);
+.hero__lead {
+  margin-top: var(--s-5);
 }
 
-.hero__tagline {
-  color: var(--text-muted);
-  white-space: nowrap;
-  flex: none;
-  writing-mode: vertical-rl;
-  rotate: 180deg;
-  align-self: flex-end;
-  margin-bottom: var(--s-5);
-}
-
-@media (max-width: 1023px) {
-  .hero__tagline {
-    writing-mode: horizontal-tb;
-    rotate: none;
-    margin-bottom: 0;
-    align-self: center;
-  }
-  .hero__figure { flex-direction: column-reverse; align-items: flex-start; }
-}
-
-.portrait {
-  margin: 0;
-  max-width: 380px;
-  width: 100%;
+.hero__now {
+  align-self: center;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: var(--s-3) var(--s-3) var(--s-2);
-  display: flex;
-  flex-direction: column;
+  border-top: 2px solid var(--accent-mark);
+  padding: var(--s-5) var(--s-5) var(--s-4);
 }
 
-.portrait__img {
-  width: 100%;
-  height: auto;
-  /* The cut-out is 577x433 landscape with the subject centred and dead
-     space on all sides. A square frame with cover crops the empty flanks
-     and scales the subject up without upscaling the source (380/433 ≈ 0.88). */
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: center 42%;
-  /* unify skin tones with the palette and soften the cut-out fringe */
-  filter: grayscale(0.35) contrast(1.06);
-  transition: filter var(--dur-slow) var(--ease-out-quart);
-  mask-image: linear-gradient(to top, transparent 0, #000 6%);
-  -webkit-mask-image: linear-gradient(to top, transparent 0, #000 6%);
+.hero__now-label {
+  margin-bottom: var(--s-4);
 }
 
-.portrait:hover .portrait__img,
-.portrait:focus-within .portrait__img {
-  filter: grayscale(0) contrast(1);
+.hero__now-org {
+  font-size: var(--fs-h3);
+  font-weight: 650;
+  letter-spacing: var(--track-tight);
+  line-height: 1.15;
 }
 
-.portrait__caption {
-  margin-top: var(--s-3);
-  padding-top: var(--s-2);
+.hero__now-role {
+  color: var(--text-muted);
+  margin-top: var(--s-1);
+}
+
+.hero__now-facts {
+  margin-top: var(--s-5);
+  padding-top: var(--s-4);
   border-top: 1px solid var(--border);
+}
+
+.hero__tagline-inline {
+  margin-top: var(--s-5);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-style: italic;
 }
 
 /* ================================================================== TICKER */
@@ -499,6 +477,7 @@
 .project__index { grid-column: 1 / -1; display: flex; gap: var(--s-4); }
 .project__body  { grid-column: 1 / -1; }
 .frame          { grid-column: 1 / -1; }
+.pipeline       { grid-column: 1 / -1; }
 
 @media (min-width: 1024px) {
   .project__index {
@@ -511,7 +490,8 @@
     align-self: start;
   }
   .project__body { grid-column: 3 / span 4; }
-  .frame         { grid-column: 7 / span 6; }
+  .frame,
+  .pipeline      { grid-column: 7 / span 6; }
 }
 
 .project__title {
@@ -710,7 +690,7 @@
   margin-bottom: var(--s-4);
 }
 
-/* ================================================================= JOURNEY */
+/* ============================================================== EXPERIENCE */
 
 /* two entries is too few for a dot-and-line timeline — it looks sparse.
    A resume-set ledger is also what recruiters read fastest. */
@@ -774,6 +754,165 @@
 
 @media (min-width: 768px) {
   .entry__tag { text-align: right; }
+}
+
+/* the pipeline ------------------------------------------------------------
+   The AI flagship is an internal back-office system, so it has no screenshot
+   to show. A typographic stage list is more honest than a stock image and
+   says more about the engineering than a UI shot would. */
+
+.pipeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.pipeline__step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-1) var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--dur-base) var(--ease-out-quart);
+}
+
+@media (min-width: 480px) {
+  .pipeline__step {
+    grid-template-columns: auto 7.5rem 1fr;
+    align-items: baseline;
+  }
+}
+
+.pipeline__step:last-child { border-bottom: 0; }
+.pipeline__step:hover { background: var(--surface-elev); }
+
+.pipeline__step .mono-index {
+  /* the numbers read as one continuous rail down the left edge */
+  padding-top: 0.25em;
+}
+
+.pipeline__name {
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+}
+
+.pipeline__note {
+  grid-column: 2 / -1;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+@media (min-width: 480px) {
+  .pipeline__note { grid-column: auto; }
+}
+
+/* client line + hard metrics under a project title ------------------------ */
+
+.project__client {
+  margin-top: var(--s-2);
+  color: var(--text-muted);
+}
+
+.project__meta {
+  margin-top: var(--s-5);
+  color: var(--text-muted);
+}
+
+.work__note {
+  margin-top: var(--s-4);
+  font-size: var(--fs-body);
+}
+
+.also__client {
+  color: var(--text-muted);
+  margin-bottom: var(--s-3);
+}
+
+.also__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-top: var(--s-3);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: var(--s-0);
+  transition: color var(--dur-fast) var(--ease-out-quart),
+              border-color var(--dur-fast) var(--ease-out-quart);
+}
+
+.also__link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* earlier, self-directed work — deliberately the quietest block on the page,
+   so student projects never compete with production delivery */
+
+.earlier {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.earlier__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-1) var(--s-5);
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+@media (min-width: 768px) {
+  .earlier__item { grid-template-columns: 14rem 1fr auto; }
+}
+
+.earlier__title {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+}
+
+.earlier__desc {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  margin: 0;
+}
+
+.earlier__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease-out-quart);
+}
+
+a.earlier__link:hover { color: var(--accent); }
+.earlier__link--none { color: var(--text-muted); }
+
+/* experience: the current role and the parenthetical former company name --- */
+
+.entry__now { color: var(--accent); }
+
+.entry__org-alt {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+.entry__org a {
+  border-bottom: 1px solid var(--border-strong);
+  transition: color var(--dur-fast) var(--ease-out-quart),
+              border-color var(--dur-fast) var(--ease-out-quart);
+}
+
+.entry__org a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* ================================================================= CONTACT */
