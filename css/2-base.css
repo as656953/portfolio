@@ -263,3 +263,33 @@ p {
   .btn { border: 1px solid ButtonText; }
   .icon { stroke: CanvasText; }
 }
+
+/* ==========================================================================
+   TOUCH TARGETS
+   WCAG 2.2 SC 2.5.8 wants 24x24 CSS px minimum; Apple's HIG asks for 44.
+   Standalone text links here render at 17–21px tall, which fails on a phone.
+   Scoped to coarse pointers so the tight editorial rhythm survives on
+   desktop, where a mouse makes the spacing exception apply anyway.
+   ========================================================================== */
+
+@media (pointer: coarse) {
+  .hero__socials a,
+  .project__links a,
+  .also__link,
+  a.earlier__link,
+  .ledger dd a,
+  .entry__org a,
+  .site-footer__col ul a,
+  .contact__email,
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* the lists these sit in lose their tight spacing once each row grows,
+     so pull the gap back to keep the block from ballooning */
+  .site-footer ul { gap: 0; }
+  .hero__socials { gap: var(--s-2) var(--s-4); }
+  .ledger { gap: var(--s-1); }
+}

@@ -33,6 +33,12 @@
 .js [data-reveal].is-revealed {
   opacity: 1;
   transform: none;
+}
+
+/* Scoped to the clip variant only. Applying it to every revealed element
+   left 60 no-op clipping contexts on the page and outranked the
+   reduced-motion reset, which is more specific than a media query. */
+.js [data-reveal="clip"].is-revealed {
   clip-path: inset(0 0 0 0);
 }
 
@@ -75,9 +81,13 @@
 
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal],
-  .js [data-reveal="clip"] {
+  .js [data-reveal].is-revealed,
+  .js [data-reveal="clip"],
+  .js [data-reveal="clip"].is-revealed {
     opacity: 1;
     transform: none;
+    /* match the .is-revealed specificity, or that rule wins and leaves a
+       no-op clipping context behind on every revealed element */
     clip-path: none;
     transition: none;
   }

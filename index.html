@@ -55,13 +55,12 @@
       })();
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&family=IBM+Plex+Mono:wght@400;500&display=swap"
-    />
+    <!-- crossorigin is mandatory on font preload even same-origin; without it
+         the browser fetches the file a second time -->
+    <link rel="preload" href="fonts/archivo-400_800-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin />
 
+    <link rel="stylesheet" href="css/0-fonts.css" />
     <link rel="stylesheet" href="css/1-tokens.css" />
     <link rel="stylesheet" href="css/2-base.css" />
     <link rel="stylesheet" href="css/3-chrome.css" />

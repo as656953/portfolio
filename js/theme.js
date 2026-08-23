@@ -18,11 +18,12 @@ export function initTheme() {
     const isDark = root.dataset.theme === "dark";
     button.setAttribute("aria-pressed", String(isDark));
 
-    // the visible label names the CURRENT theme; the hidden label names the
-    // ACTION, which is what a screen reader should announce for a button
+    // Both labels name the ACTION, not the current state. A text button
+    // reading "Light" while the page is already light reads as a status
+    // chip, not a control — and it contradicted what the screen reader said.
     const label = button.querySelector(".theme-toggle__label");
     const sr = button.querySelector(".visually-hidden");
-    if (label) label.textContent = isDark ? "Dark" : "Light";
+    if (label) label.textContent = isDark ? "Light" : "Dark";
     if (sr) sr.textContent = isDark ? "Switch to light theme" : "Switch to dark theme";
   };
 
